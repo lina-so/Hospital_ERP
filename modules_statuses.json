@@ -1,0 +1,8 @@
+{
+    "Core": true,
+    "Role": true,
+    "Appointment": true,
+    "Hospital": true,
+    "Staff": true,
+    "Service": true
+}

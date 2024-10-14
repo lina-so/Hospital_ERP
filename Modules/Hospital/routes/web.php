@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Hospital\Http\Controllers\HospitalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,3 @@ use Modules\Hospital\Http\Controllers\HospitalController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('hospital', HospitalController::class)->names('hospital');
-});

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Staff\Http\Controllers\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,3 @@ use Modules\Staff\Http\Controllers\StaffController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('staff', StaffController::class)->names('staff');
-});

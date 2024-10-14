@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Service\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,3 @@ use Modules\Service\Http\Controllers\ServiceController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('service', ServiceController::class)->names('service');
-});

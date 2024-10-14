@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Service\Http\Controllers\ServiceController;
 
 /*
  *--------------------------------------------------------------------------
@@ -14,6 +13,6 @@ use Modules\Service\Http\Controllers\ServiceController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('service', ServiceController::class)->names('service');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('service', ServiceController::class)->names('service');
+// });

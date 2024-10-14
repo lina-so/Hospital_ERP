@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Appointment\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,6 @@ use Modules\Appointment\Http\Controllers\AppointmentController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('appointment', AppointmentController::class)->names('appointment');
-});
+// Route::group([], function () {
+//     Route::resource('appointment', AppointmentController::class)->names('appointment');
+// });

@@ -4,7 +4,7 @@ namespace Modules\Hospital\Models\Department;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Hospital\Database\Factories\Department/DepartmentCategoryFactory;
+use Modules\Hospital\Database\Factories\DepartmentCategoryFactory;
 
 class DepartmentCategory extends Model
 {
@@ -19,8 +19,8 @@ class DepartmentCategory extends Model
 
     protected $fillable = ['name'];
 
-    // protected static function newFactory(): Department/DepartmentCategoryFactory
-    // {
-    //     // return Department/DepartmentCategoryFactory::new();
-    // }
+    protected static function newFactory()
+    {
+        return DepartmentCategoryFactory::new();
+    }
 }

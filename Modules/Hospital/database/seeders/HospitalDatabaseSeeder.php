@@ -3,6 +3,8 @@
 namespace Modules\Hospital\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Hospital\Database\Seeders\SeedDepartmentSeeder;
+use Modules\Hospital\Database\Seeders\SeedDepartmentCategorySeeder;
 
 class HospitalDatabaseSeeder extends Seeder
 {
@@ -11,6 +13,9 @@ class HospitalDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        // $this->call([
+        //     SeedDepartmentCategorySeeder::class,
+        //     SeedDepartmentSeeder::class,
+        // ]);
     }
 }

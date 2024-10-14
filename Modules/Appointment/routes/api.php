@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Appointment\Http\Controllers\AppointmentController;
 
 /*
  *--------------------------------------------------------------------------
@@ -14,6 +13,6 @@ use Modules\Appointment\Http\Controllers\AppointmentController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('appointment', AppointmentController::class)->names('appointment');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('appointment', AppointmentController::class)->names('appointment');
+// });

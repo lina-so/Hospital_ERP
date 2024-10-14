@@ -4,5 +4,6 @@
     "Appointment": true,
     "Hospital": true,
     "Staff": true,
-    "Service": true
+    "Service": true,
+    "Auth": true
 }

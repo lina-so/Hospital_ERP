@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Role\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,4 @@ use Modules\Role\Http\Controllers\RoleController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('role', RoleController::class)->names('role');
-});
+

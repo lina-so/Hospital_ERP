@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Hospital\Http\Controllers\HospitalController;
+use Modules\Hospital\Http\Controllers\Doctor\DoctorController;
+use Modules\Hospital\Http\Controllers\Department\DepartmentController;
+use Modules\Hospital\Http\Controllers\Department\DepartmentCategoryController;
 
 /*
  *--------------------------------------------------------------------------
@@ -14,6 +16,11 @@ use Modules\Hospital\Http\Controllers\HospitalController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('hospital', HospitalController::class)->names('hospital');
-});
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('hospital', HospitalController::class)->names('hospital');
+// });
+
+Route::apiResource('department', DepartmentController::class)->names('department');
+Route::apiResource('department-category', DepartmentCategoryController::class)->names('department-category');
+Route::apiResource('doctor', DoctorController::class)->names('doctor');
+

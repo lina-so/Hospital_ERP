@@ -4,7 +4,7 @@ namespace Modules\Hospital\Models\Specialty;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Hospital\Database\Factories\Specialty/SpecialtyFactory;
+use Modules\Hospital\Database\Factories\SpecialtyFactory;
 
 class Specialty extends Model
 {
@@ -19,8 +19,8 @@ class Specialty extends Model
 
     protected $fillable = ['name'];
 
-    // protected static function newFactory(): Specialty/SpecialtyFactory
-    // {
-    //     // return Specialty/SpecialtyFactory::new();
-    // }
+    protected static function newFactory()
+    {
+        return SpecialtyFactory::new();
+    }
 }

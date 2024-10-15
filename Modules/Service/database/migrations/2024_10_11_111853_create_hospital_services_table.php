@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Modules\Hospital\Models\Department\Department;
+use Modules\Service\Enums\hospital_service\StatusEnum;
 use Modules\Service\Enums\hospital_service\CategoryEnum;
 use Modules\Hospital\Models\Department\DepartmentCategory;
 
@@ -24,7 +25,8 @@ return new class extends Migration
             $table->text('description')->nullable();
 
             $table->enum('category', CategoryEnum::getValues());
-            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->enum('status', StatusEnum::getValues())->default(StatusEnum::Available);
+
 
 
             $table->timestamps();

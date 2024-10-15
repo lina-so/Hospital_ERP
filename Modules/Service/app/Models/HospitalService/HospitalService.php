@@ -16,7 +16,8 @@ class HospitalService extends Model
     protected $with = [];
     protected $table = 'hospital_services';
 
-    protected $fillable = ['service_name', 'department_id', 'department_category_id', 'price', 'description', 'category'];
+    protected $fillable = ['service_name', 'department_id', 'department_category_id',
+     'price', 'description', 'category','status'];
 
 
     // protected static function newFactory(): HospitalService/HospitalServiceFactory

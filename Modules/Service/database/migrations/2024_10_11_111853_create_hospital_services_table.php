@@ -20,11 +20,11 @@ return new class extends Migration
             $table->foreignIdFor(Department::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(DepartmentCategory::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
-
             $table->decimal('price', 10, 2);
             $table->text('description')->nullable();
 
             $table->enum('category', CategoryEnum::getValues());
+            $table->enum('status', ['available', 'unavailable'])->default('available');
 
 
             $table->timestamps();

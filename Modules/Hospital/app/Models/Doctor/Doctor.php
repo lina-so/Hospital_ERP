@@ -5,6 +5,7 @@ namespace Modules\Hospital\Models\Doctor;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Modules\Appointment\Models\Patient\Patient;
 use Modules\Hospital\Models\Department\Department;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Hospital\Database\Factories\DoctorFactory;
@@ -30,6 +31,10 @@ class Doctor extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
+    }
     protected static function newFactory()
     {
         return DoctorFactory::new();

@@ -19,7 +19,7 @@ class DepartmentController extends Controller
     {
         $departments = collect();
 
-        Department::chunk(100, function ($depChunk) use ($departments) {
+        Department::with('doctors','rooms')->chunk(100, function ($depChunk) use ($departments) {
             foreach ($depChunk as $dep) {
                 $departments->push($dep);
             }

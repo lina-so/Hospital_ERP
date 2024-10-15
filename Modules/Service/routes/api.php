@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Service\Http\Controllers\HospitalService\HospitalServiceController;
 
 /*
  *--------------------------------------------------------------------------
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
 //     Route::apiResource('service', ServiceController::class)->names('service');
 // });
+Route::apiResource('service', HospitalServiceController::class)->names('service');

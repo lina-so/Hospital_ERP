@@ -3,6 +3,7 @@
 namespace Modules\Hospital\Models\Floor;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Hospital\Database\Factories\FloorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Modules\Hospital\Database\Factories\Floor/FloorFactory;
 
@@ -19,8 +20,8 @@ class Floor extends Model
 
     protected $fillable = ['name','floor_number'];
 
-    // protected static function newFactory(): Floor/FloorFactory
-    // {
-    //     // return Floor/FloorFactory::new();
-    // }
+    protected static function newFactory()
+    {
+        return FloorFactory::new();
+    }
 }

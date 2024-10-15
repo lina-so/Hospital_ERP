@@ -15,4 +15,5 @@ final class CategoryEnum extends Enum
     const Imaging = 'Imaging';
     const LabTest = 'Lab_Test';
     const Surgery = 'Surgery';
+    const MedicalInterventions = 'medical_interventions'; // التدخلات الطبية
 }

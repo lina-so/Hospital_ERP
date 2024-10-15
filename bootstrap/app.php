@@ -106,18 +106,18 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->render(function (QueryException $e, Request $request) {
-            if ($request->is('api/*')) {
-                $message = "Query failed ,Integrity constraint violation";
-                return response()->json([
-                    'status_code' => 500,
-                    'data' => [
-                        'status' => 'failed',
-                        'message' => $message,
-                    ]
-                ]);
-            }
-        });
+        // $exceptions->render(function (QueryException $e, Request $request) {
+        //     if ($request->is('api/*')) {
+        //         $message = "Query failed ,Integrity constraint violation";
+        //         return response()->json([
+        //             'status_code' => 500,
+        //             'data' => [
+        //                 'status' => 'failed',
+        //                 'message' => $message,
+        //             ]
+        //         ]);
+        //     }
+        // });
 
 
     })->create();

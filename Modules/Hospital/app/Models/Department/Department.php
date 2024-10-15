@@ -2,6 +2,7 @@
 
 namespace Modules\Hospital\Models\Department;
 
+use Modules\Hospital\Models\Room\Room;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Hospital\Models\Doctor\Doctor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ class Department extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $with = ['doctors'];
+    // protected $with = ['doctors','rooms'];
 
     protected $table = 'departments';
 
@@ -23,6 +24,11 @@ class Department extends Model
     public function doctors()
     {
         return $this->hasMany(Doctor::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
     }
 
     protected static function newFactory()

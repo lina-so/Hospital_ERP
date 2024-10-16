@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Role\Http\Controllers\Admin\DoctorManagementController;
 
 /*
  *--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
 //     Route::apiResource('role', RoleController::class)->names('role');
 // });
+
+Route::middleware('auth:admin')->group(function () {
+    Route::apiResource('admin/doctor', DoctorManagementController::class)->names('doctor-management');
+});

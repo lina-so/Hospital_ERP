@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Role\Models\Admin\Admin;
 use Modules\Auth\Http\Requests\Auth\LoginRequest;
 
 class AuthController extends Controller
@@ -18,31 +19,21 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $requestData = $request->validated();
-        $user = $this->findUserByEmail($requestData);
-        $auth_user = $this->authUser($user);
-        $accessToken = $this->createAccessToken($auth_user);
+        $admin = $this->findAdminByEmail($requestData);
+        $accessToken = $this->createAccessToken($admin);
 
-        return $this->loginSuccess($accessToken,$auth_user->name,'','login successful',200);
+
+        return $this->loginSuccess($accessToken, $admin->name, '', 'login successful', 200);
     }
 
     /********************************************************************************************/
-    public function findUserByEmail($requestData)
+    public function findAdminByEmail($requestData)
     {
-        $user = User::where('email',$requestData['email'])->first();
-        return $user;
-    }
-
-    /********************************************************************************************/
-    public function authUser($user)
-    {
-        Auth::login($user);
-        $authUser = Auth::user();
-        return $authUser;
+        return Admin::where('email', $requestData['email'])->first();
     }
     /********************************************************************************************/
-    public function createAccessToken($user)
+    public function createAccessToken($admin)
     {
-        $accessToken = $user->createToken('#$_my_app_token_@#')->plainTextToken;
-        return $accessToken;
+        return $admin->createToken('#$_admin_app_token_@#')->plainTextToken;
     }
 }

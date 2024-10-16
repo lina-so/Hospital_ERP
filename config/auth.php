@@ -1,5 +1,10 @@
 <?php
 
+use Modules\Role\Models\Admin\Admin;
+use Modules\Hospital\Models\Doctor\Doctor;
+use Modules\Staff\Models\Employee\Employee;
+use Modules\Appointment\Models\Patient\Patient;
+
 return [
 
     /*
@@ -40,6 +45,25 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'doctor' => [
+            'driver' => 'sanctum',
+            'provider' => 'doctors',
+            'hash' => false,
+        ],
+        'patient' => [
+            'driver' => 'sanctum',
+            'provider' => 'patients',
+            'hash' => false,
+        ],
+        'employee' => [
+            'driver' => 'sanctum',
+            'provider' => 'employees',
+            'hash' => false,
+        ],
+        'admin' => [
+            'driver' => 'sanctum',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -64,6 +88,24 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', Doctor::class),
+        ],
+        'patients' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', Patient::class),
+        ],
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', Employee::class),
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', Admin::class),
+        ],
+
+
 
         // 'users' => [
         //     'driver' => 'database',

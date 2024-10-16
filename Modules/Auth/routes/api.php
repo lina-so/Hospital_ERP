@@ -20,7 +20,7 @@ Route::controller(AuthController::class)
     ->group(function(){
         Route::middleware('guest:sanctum')
         ->group(function(){
-            Route::post('/login','login')->name('login');
+            Route::post('admin/login','login')->name('login');
         });
 
     });

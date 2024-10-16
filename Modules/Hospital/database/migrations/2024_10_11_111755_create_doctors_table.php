@@ -18,8 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('specialization');
-            $table->string('phone_number');
+            $table->string('phone_number')->unique();
             $table->foreignIdFor(Specialty::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Department::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(DepartmentCategory::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();

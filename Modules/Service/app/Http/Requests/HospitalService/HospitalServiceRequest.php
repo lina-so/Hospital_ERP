@@ -23,7 +23,6 @@ class HospitalServiceRequest extends FormRequest
             'description' => ['nullable', 'string','min:3','max:255'],
             'category' => ['required', new EnumValue(CategoryEnum::class)],
             'status' => ['required', new EnumValue(StatusEnum::class)],
-
         ];
     }
 

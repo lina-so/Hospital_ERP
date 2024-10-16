@@ -26,5 +26,11 @@ Route::apiResource('room-category', RoomCategoryController::class)->names('room-
 
 Route::apiResource('department', DepartmentController::class)->names('department');
 Route::apiResource('department-category', DepartmentCategoryController::class)->names('department-category');
-Route::apiResource('doctor', DoctorController::class)->names('doctor');
+
+
+//*////////////////////////// Doctor /////////////////////////////////////*//
+
+Route::middleware('auth:doctor')->group(function () {
+    // Route::post('/doctor/login', [DoctorController::class, 'login']);
+});
 

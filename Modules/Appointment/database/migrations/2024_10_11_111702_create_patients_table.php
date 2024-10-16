@@ -13,19 +13,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->string('sequence_number');
+            $table->bigIncrements('id');
+            $table->uuid('sequence_number')->default(DB::raw('(UUID())'))->index();
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth');
             $table->integer('age')->nullable();
             $table->enum('gender', GenderEnum::getValues());
-            $table->string('phone_number');
+            $table->string('phone_number')->unique();
             $table->text('address')->nullable();
             $table->text('allergies')->nullable();
             $table->date('admission_date')->nullable();
             $table->date('discharge_date')->nullable();
-
             $table->timestamps();
         });
     }

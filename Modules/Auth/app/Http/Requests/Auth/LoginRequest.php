@@ -13,7 +13,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=>['required','exists:users,email'],
+            'email'=>['required','exists:admins,email'],
             'password'=>['required','string',new PasswordMatchRule($this->email)],
         ];
     }

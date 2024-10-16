@@ -5,6 +5,7 @@ namespace Modules\Auth\Rules\Auth;
 use Closure;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Modules\Role\Models\Admin\Admin;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class PasswordMatchRule implements ValidationRule
@@ -18,9 +19,10 @@ class PasswordMatchRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $user = User::where('email',$this->email)->first();
-        if(!Hash::check($value, $user->password))
-        {
+        // dd($this->email);
+        $admin = Admin::where('email', $this->email)->first();
+
+        if ($admin === null || !Hash::check($value, $admin->password)) {
             $fail('The provided password does not match our records.');
         }
     }

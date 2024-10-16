@@ -23,7 +23,7 @@ class Doctor extends Authenticatable
 
     protected $table = 'doctors';
 
-    protected $fillable = ['first_name', 'last_name', 'specialization', 'phone_number',
+    protected $fillable = ['first_name', 'last_name', 'phone_number',
     'specialty_id', 'department_id', 'department_category_id'];
 
     public function department()

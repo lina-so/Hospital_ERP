@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             // SeedDepartmentCategorySeeder::class,
-            // SeedDepartmentSeeder::class,
+            SeedDepartmentSeeder::class,
             // SpecialtySeeder::class,
             // SeedDoctorSeeder::class,
             // FloorSeeder::class,
             // DaySeeder::class,
-            MedicalEquipmentSeeder::class,
+            // MedicalEquipmentSeeder::class,
         ]);
     }
 }

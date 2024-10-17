@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Role\Http\Controllers\Admin\DoctorManagementController;
 use Modules\Role\Http\Controllers\Admin\PatientManagementController;
+use Modules\Role\Http\Controllers\Admin\EmployeeManagementController;
 
 /*
  *--------------------------------------------------------------------------
@@ -22,5 +23,12 @@ use Modules\Role\Http\Controllers\Admin\PatientManagementController;
 Route::middleware('auth:admin')->group(function () {
     Route::apiResource('admin/doctor', DoctorManagementController::class)->names('doctor-management');
     Route::apiResource('admin/patient', PatientManagementController::class)->names('patient-management');
+    Route::apiResource('admin/employee', EmployeeManagementController::class)->names('employee-management');
+
+
+});
+
+Route::middleware('auth:employee')->group(function () {
+    Route::apiResource('employee/patient', PatientManagementController::class)->names('patient-management');
 
 });

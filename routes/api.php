@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+
+
+Route::middleware('auth:employee')->group(function () {
+    // Route::apiResource('employee/patient', PatientManagementController::class)->names('doctor-management');
+
+});

@@ -35,7 +35,7 @@ class Admin extends Authenticatable
         'remember_token',
     ];
 
-    /**
+    /**p
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

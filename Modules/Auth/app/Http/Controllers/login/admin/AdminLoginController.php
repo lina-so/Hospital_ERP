@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Auth\Http\Controllers\Auth;
+namespace Modules\Auth\Http\Controllers\login\admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -8,15 +8,17 @@ use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Role\Models\Admin\Admin;
-use Modules\Auth\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Route;
+use Modules\Staff\Models\Employee\Employee;
+use Modules\Auth\Http\Requests\Auth\login\admin\AdminLoginRequest;
 
-class AuthController extends Controller
+class AdminLoginController extends Controller
 {
     use ResponseTrait;
 
     /********************************************************************************************/
 
-    public function login(LoginRequest $request)
+    public function login(AdminLoginRequest $request)
     {
         $requestData = $request->validated();
         $admin = $this->findAdminByEmail($requestData);

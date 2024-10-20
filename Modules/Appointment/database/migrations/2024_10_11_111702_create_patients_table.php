@@ -2,6 +2,7 @@
 
 use App\Enums\Gender\GenderEnum;
 use Illuminate\Support\Facades\Schema;
+use Modules\Hospital\Models\Room\Room;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -15,6 +16,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('sequence_number')->default(DB::raw('(UUID())'))->index();
+            $table->string('ID_number')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth');
@@ -25,6 +27,8 @@ return new class extends Migration
             $table->text('allergies')->nullable();
             $table->date('admission_date')->nullable();
             $table->date('discharge_date')->nullable();
+            // $table->foreignIdFor(Room::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->timestamps();
         });
     }

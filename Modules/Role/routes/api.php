@@ -28,7 +28,12 @@ Route::middleware('auth:admin')->group(function () {
 
 });
 
-Route::middleware('auth:employee')->group(function () {
+Route::middleware('auth:employee' ,'employee_type:receptionist')->group(function () {
     Route::apiResource('employee/patient', PatientManagementController::class)->names('patient-management');
 
 });
+
+// Route::middleware('auth:employee' ,'employee_type:nurse')->group(function () {
+//     Route::apiResource('employee/medical-record', MedicalRecordController::class)->names('medical-record');
+
+// });

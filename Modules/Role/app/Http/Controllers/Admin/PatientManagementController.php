@@ -13,6 +13,7 @@ use Modules\Appointment\Models\Patient\Patient;
 use Modules\Hospital\Http\Requests\Doctor\DoctorRequest;
 use Modules\Appointment\Http\Requests\Visit\VisitRequest;
 use Modules\Appointment\Http\Requests\Patient\PatientRequest;
+use Modules\Hospital\Events\Doctor\NotifyDoctorOfNewPatientEvent;
 
 class PatientManagementController extends Controller
 {
@@ -37,12 +38,14 @@ class PatientManagementController extends Controller
             $validated_data = $request->validated();
             $visit_request_validated = $v_request->validated();
 
+            \Log::info('Starting transaction...');
             $patient = Patient::firstOrCreate(
                 [
                     'ID_number' => $request->input('ID_number')
                 ],
                 $validated_data
             );
+            \Log::info('Patient created.');
 
             $room = Room::where('id', $visit_request_validated['room_id'])
                         ->where('status', 'available')
@@ -50,8 +53,16 @@ class PatientManagementController extends Controller
             if (!$room) {
                 return response()->json(['error' => 'Room not found or occupied'], 400);
             }
+            \Log::info('Room query completed.');
 
-            $patient->visits()->create($visit_request_validated);
+            $visit = $patient->visits()->create($visit_request_validated);
+            \Log::info('Visit created.');
+
+            $room->update(['status'=>'occupied']);
+            $doctor_id = $visit_request_validated['doctor_id'];
+
+            event(new NotifyDoctorOfNewPatientEvent($doctor_id,$visit,$room->room_number));
+            \Log::info('Event dispatched.');
 
             return $this->apiSuccess($patient, 'Patient added successfully', 201);
         });

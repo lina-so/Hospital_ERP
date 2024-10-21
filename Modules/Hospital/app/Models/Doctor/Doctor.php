@@ -24,7 +24,23 @@ class Doctor extends Authenticatable
     protected $table = 'doctors';
 
     protected $fillable = ['first_name', 'last_name', 'phone_number',
-    'specialty_id', 'department_id', 'department_category_id'];
+    'specialty_id', 'department_id', 'department_category_id','email','password'];
+
+    protected $hidden = [
+        'password',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 
     public function department()
     {

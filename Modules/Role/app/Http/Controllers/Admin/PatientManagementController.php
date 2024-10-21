@@ -4,10 +4,14 @@ namespace Modules\Role\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Traits\APi\ResponseTrait;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Modules\Hospital\Models\Room\Room;
+use Modules\Appointment\Models\Visit\Visit;
 use Modules\Hospital\Models\Patient\Doctor;
 use Modules\Appointment\Models\Patient\Patient;
 use Modules\Hospital\Http\Requests\Doctor\DoctorRequest;
+use Modules\Appointment\Http\Requests\Visit\VisitRequest;
 use Modules\Appointment\Http\Requests\Patient\PatientRequest;
 
 class PatientManagementController extends Controller
@@ -26,14 +30,33 @@ class PatientManagementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PatientRequest $request)
+
+    public function store(PatientRequest $request, VisitRequest $v_request)
     {
-        $validated = $request->validated();
-        $patient = Patient::create($validated);
-        return $this->apiSuccess($patient, 'patient added successfully',201);
+        return DB::transaction(function () use ($request, $v_request) {
+            $validated_data = $request->validated();
+            $visit_request_validated = $v_request->validated();
 
+            $patient = Patient::firstOrCreate(
+                [
+                    'ID_number' => $request->input('ID_number')
+                ],
+                $validated_data
+            );
 
+            $room = Room::where('id', $visit_request_validated['room_id'])
+                        ->where('status', 'available')
+                        ->first();
+            if (!$room) {
+                return response()->json(['error' => 'Room not found or occupied'], 400);
+            }
+
+            $patient->visits()->create($visit_request_validated);
+
+            return $this->apiSuccess($patient, 'Patient added successfully', 201);
+        });
     }
+
 
     /**
      * Show the specified resource.`

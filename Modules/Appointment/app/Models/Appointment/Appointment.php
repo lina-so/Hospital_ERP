@@ -16,7 +16,8 @@ class Appointment extends Model
     protected $table = 'appointments';
 
     protected $fillable = ['patient_id', 'hospital_service_id', 'appointment_date',
-    'status', 'reason_for_visit'];
+    'status'];
+
 
 
     // protected static function newFactory(): Appointment/AppointmentFactory

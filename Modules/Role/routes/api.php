@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Role\Http\Controllers\Admin\DoctorManagementController;
 use Modules\Role\Http\Controllers\Admin\PatientManagementController;
 use Modules\Role\Http\Controllers\Admin\EmployeeManagementController;
+use Modules\Appointment\Http\Controllers\Record\MedicalRecordController;
 
 /*
  *--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::middleware('auth:employee' ,'employee_type:receptionist')->group(function
 
 });
 
-// Route::middleware('auth:employee' ,'employee_type:nurse')->group(function () {
-//     Route::apiResource('employee/medical-record', MedicalRecordController::class)->names('medical-record');
+Route::middleware('auth:employee' ,'employee_type:nurse')->group(function () {
+    Route::apiResource('employee/medical-record', MedicalRecordController::class)->names('medical-record');
 
-// });
+});

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('gender', GenderEnum::getValues());
             $table->string('phone_number')->unique();
             $table->text('address')->nullable();
-            $table->text('allergies')->nullable();
+            // $table->text('allergies')->nullable();
             $table->date('admission_date')->nullable();
             $table->date('discharge_date')->nullable();
 

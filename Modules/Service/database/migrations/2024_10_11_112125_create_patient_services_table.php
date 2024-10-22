@@ -18,11 +18,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Patient::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(HospitalService::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->enum('category', StatusEnum::getValues());
+            $table->enum('category', StatusEnum::getValues())->default(StatusEnum::Pending);
+            $table->string('service_type')->comment('جراحة قلب مفتوح مثلاً');
 
-            $table->unsignedBigInteger('requested_by');
-            $table->foreign('requested_by')->references('id')->on('employees')->onDelete('cascade');
-            $table->date('date_requested');
+            // $table->unsignedBigInteger('requested_by');
+            // $table->foreign('requested_by')->references('id')->on('employees')->onDelete('cascade');
+            // $table->date('date_requested');
             $table->timestamps();
         });
     }

@@ -22,7 +22,7 @@ class Patient extends Model
     protected $table = 'patients';
 
     protected $fillable = ['sequence_number', 'first_name', 'last_name',
-     'date_of_birth', 'age', 'gender', 'phone_number', 'address', 'allergies',
+     'date_of_birth', 'age', 'gender', 'phone_number', 'address',
      'admission_date', 'discharge_date','ID_number'];
 
      protected function casts(): array

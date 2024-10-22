@@ -20,7 +20,8 @@ class Visit extends Model
     'doctor_id',
     'visit_reason',
     'visit_date',
-    'room_id'
+    'room_id',
+    'status'
     ];
 
     protected function casts(): array

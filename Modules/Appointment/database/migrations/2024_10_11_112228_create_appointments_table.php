@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignIdFor(Patient::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(HospitalService::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->dateTime('appointment_date');
-            $table->enum('status', StatusEnum::getValues());
+            // $table->integer('duration')->default(0);
+            $table->enum('status', StatusEnum::getValues())->default(StatusEnum::Upcoming);
 
-            $table->text('reason_for_visit');
             $table->timestamps();
         });
     }

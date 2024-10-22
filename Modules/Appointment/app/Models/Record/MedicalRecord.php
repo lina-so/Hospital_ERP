@@ -16,7 +16,7 @@ class MedicalRecord extends Model
     protected $table = 'medical_records';
 
     protected $fillable = ['patient_id', 'doctor_id', 'patient_service_id',
-     'diagnosis', 'treatment', 'notes'];
+     'diagnosis', 'symptoms','allergy','treatment', 'notes','visit_id'];
 
 
     // protected static function newFactory(): Record/MedicalRecordFactory

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Hospital\Models\Doctor\Doctor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Hospital\Database\Factories\DepartmentFactory;
+use Modules\Service\Models\HospitalService\HospitalService;
 
 class Department extends Model
 {
@@ -31,6 +32,16 @@ class Department extends Model
         return $this->hasMany(Room::class);
     }
 
+    public function services()
+    {
+        return $this->hasMany(HospitalService::class);
+    }
+
+    public function departmentCategory()
+    {
+        return $this->belongsTo(DepartmentCategory::class);
+    }
+    
     protected static function newFactory()
     {
         return DepartmentFactory::new();

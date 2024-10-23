@@ -7,6 +7,7 @@ use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Modules\Hospital\Models\Room\Room;
 use Modules\Hospital\Http\Requests\Room\RoomRequest;
+use Modules\Hospital\Transformers\Room\RoomResource;
 
 class RoomController extends Controller
 {
@@ -24,7 +25,7 @@ class RoomController extends Controller
                 $rooms->push($room);
             }
         });
-        return $this->apiSuccess($rooms, 'rooms retrieved successfully',200);
+        return $this->apiSuccess(RoomResource::collection($rooms), 'rooms retrieved successfully',200);
 
     }
 
@@ -35,7 +36,7 @@ class RoomController extends Controller
     {
         $validated = $request->validated();
         $room = Room::create($validated);
-        return $this->apiSuccess($room, 'room added successfully',201);
+        return $this->apiSuccess(new RoomResource($room), 'room added successfully',201);
 
 
     }
@@ -46,7 +47,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         $room = $room->with('department')->first();
-        return $this->apiSuccess($room, 'room details successfully',200);
+        return $this->apiSuccess(new RoomResource($room), 'room details successfully',200);
 
     }
 
@@ -57,7 +58,7 @@ class RoomController extends Controller
     {
         $validated = $request->validated();
         $room->update($validated);
-        return $this->apiSuccess($room, 'room updated successfully',201);
+        return $this->apiSuccess(new RoomResource($room), 'room updated successfully',201);
 
     }
     /**
@@ -66,7 +67,7 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room->delete();
-        return $this->apiSuccess($room, 'room deleted successfully',201);
+        return $this->apiSuccess(new RoomResource($room), 'room deleted successfully',201);
 
     }
 }

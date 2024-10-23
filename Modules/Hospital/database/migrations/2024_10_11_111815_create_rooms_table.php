@@ -5,6 +5,7 @@ use Modules\Hospital\Models\Floor\Floor;
 use Illuminate\Database\Schema\Blueprint;
 use Modules\Hospital\Enums\room\StatusEnum;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Hospital\Models\Room\RoomCategory;
 use Modules\Hospital\Models\Department\Department;
 use Modules\Hospital\Models\Department\DepartmentCategory;
 
@@ -18,7 +19,9 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('room_number')->unique();
+            $table->foreignIdFor(RoomCategory::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Department::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->foreignIdFor(Floor::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->enum('status', StatusEnum::getValues());

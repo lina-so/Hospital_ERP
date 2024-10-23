@@ -7,6 +7,7 @@ use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Modules\Staff\Models\Employee\Employee;
 use Modules\Staff\Http\Requests\Employee\EmployeeRequest;
+use Modules\Staff\Transformers\Employee\EmployeeResource;
 
 class EmployeeManagementController extends Controller
 {
@@ -17,7 +18,7 @@ class EmployeeManagementController extends Controller
     public function index()
     {
         $employees = Employee::orderBy('job_title', 'asc')->get();
-        return $this->apiSuccess($employees, 'employees fetched successfully',200);
+        return $this->apiSuccess(EmployeeResource::collection($employees), 'employees fetched successfully',200);
     }
 
 
@@ -28,7 +29,7 @@ class EmployeeManagementController extends Controller
     {
         $validated = $request->validated();
         $employee = Employee::create($validated);
-        return $this->apiSuccess($employee, 'employee added successfully',201);
+        return $this->apiSuccess(new EmployeeResource($employee), 'employee added successfully',201);
 
     }
 
@@ -37,7 +38,7 @@ class EmployeeManagementController extends Controller
      */
     public function show(Employee $employee)
     {
-        return $this->apiSuccess($employee, 'employee retrieved successfully',200);
+        return $this->apiSuccess(new EmployeeResource($employee), 'employee retrieved successfully',200);
 
     }
 
@@ -49,7 +50,7 @@ class EmployeeManagementController extends Controller
 
         $validated = $request->validated();
         $employee->update($validated);
-        return $this->apiSuccess($employee, 'employee updated successfully',201);
+        return $this->apiSuccess(new EmployeeResource($employee), 'employee updated successfully',201);
 
     }
     /**
@@ -58,7 +59,7 @@ class EmployeeManagementController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return $this->apiSuccess($employee, 'employee deleted successfully',201);
+        return $this->apiSuccess(new EmployeeResource($employee), 'employee deleted successfully',201);
 
     }
 }

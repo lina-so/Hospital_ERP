@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 // use Modules\Staff\Database\Factories\Employee/EmpolyeeFactory;
 
 use Illuminate\Notifications\Notifiable;
+use Modules\Hospital\Models\Department\Department;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -33,11 +34,18 @@ class Employee extends Authenticatable
      *
      * @return array<string, string>
      */
+
     protected function casts(): array
     {
         return [
             'password' => 'hashed',
         ];
+    }
+
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
     // protected static function newFactory(): Employee/EmpolyeeFactory

@@ -7,6 +7,7 @@ use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Modules\Hospital\Models\Department\Department;
 use Modules\Hospital\Http\Requests\Department\DepartmentRequest;
+use Modules\Hospital\Transformers\Department\DepartmentResource;
 
 class DepartmentController extends Controller
 {
@@ -24,7 +25,8 @@ class DepartmentController extends Controller
                 $departments->push($dep);
             }
         });
-        return $this->apiSuccess($departments, 'departments retrieved successfully',200);
+
+        return $this->apiSuccess(DepartmentResource::collection($departments), 'departments retrieved successfully',200);
 
     }
 
@@ -36,9 +38,8 @@ class DepartmentController extends Controller
     {
         $validated = $request->validated();
         $department = Department::create($validated);
-        return $this->apiSuccess($department, 'department added successfully',201);
 
-
+        return $this->apiSuccess(new DepartmentResource($department), 'department added successfully',201);
     }
 
     /**
@@ -46,7 +47,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        return $this->apiSuccess($department, 'department details successfully',200);
+        return $this->apiSuccess(new DepartmentResource($department), 'department details successfully',200);
 
     }
 
@@ -57,7 +58,7 @@ class DepartmentController extends Controller
     {
         $validated = $request->validated();
         $department->update($validated);
-        return $this->apiSuccess($department, 'department updated successfully',201);
+        return $this->apiSuccess(new DepartmentResource($department), 'department updated successfully',201);
 
     }
     /**
@@ -66,7 +67,7 @@ class DepartmentController extends Controller
     public function destroy(Department $department)
     {
         $department->delete();
-        return $this->apiSuccess($department, 'department deleted successfully',201);
+        return $this->apiSuccess(new DepartmentResource($department), 'department deleted successfully',201);
 
     }
 }

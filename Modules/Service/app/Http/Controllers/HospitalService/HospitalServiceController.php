@@ -5,6 +5,7 @@ namespace Modules\Service\Http\Controllers\HospitalService;
 use Illuminate\Http\Request;
 use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
+use Modules\Service\Transformers\HospitalServiceResource;
 use Modules\Service\Models\HospitalService\HospitalService;
 use Modules\Service\Http\Requests\HospitalService\HospitalServiceRequest;
 
@@ -17,7 +18,8 @@ class HospitalServiceController extends Controller
     public function index()
     {
         $services = HospitalService::all();
-        return $this->apiSuccess($services, 'HospitalServices fetched successfully',200);
+        return $this->apiSuccess(HospitalServiceResource::collection($services), 'HospitalServices fetched successfully',200);
+
     }
 
 
@@ -28,7 +30,7 @@ class HospitalServiceController extends Controller
     {
         $validated = $request->validated();
         $service = HospitalService::create($validated);
-        return $this->apiSuccess($service, 'HospitalService:'.$service->service_name.' added successfully',201);
+        return $this->apiSuccess(new HospitalServiceResource($service), 'HospitalService:'.$service->service_name.' added successfully',201);
     }
 
     /**
@@ -36,7 +38,7 @@ class HospitalServiceController extends Controller
      */
     public function show(HospitalService $service)
     {
-        return $this->apiSuccess($service, 'HospitalService:'.$service->service_name.' retrieved successfully',200);
+        return $this->apiSuccess(new HospitalServiceResource($service), 'HospitalService:'.$service->service_name.' retrieved successfully',200);
 
     }
 
@@ -48,7 +50,7 @@ class HospitalServiceController extends Controller
 
         $validated = $request->validated();
         $service->update($validated);
-        return $this->apiSuccess($service, 'HospitalService:'.$service->service_name.' updated successfully',201);
+        return $this->apiSuccess(new HospitalServiceResource($service), 'HospitalService:'.$service->service_name.' updated successfully',201);
 
     }
     /**
@@ -57,7 +59,7 @@ class HospitalServiceController extends Controller
     public function destroy(HospitalService $service)
     {
         $service->delete();
-        return $this->apiSuccess($service, 'HospitalService:'.$service->service_name.' deleted successfully',201);
+        return $this->apiSuccess(new HospitalServiceResource($service), 'HospitalService:'.$service->service_name.' deleted successfully',201);
 
     }
 }

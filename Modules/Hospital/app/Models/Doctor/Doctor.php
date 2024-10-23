@@ -6,10 +6,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Modules\Appointment\Models\Patient\Patient;
+use Modules\Hospital\Models\Specialty\Specialty;
 use Modules\Hospital\Models\Department\Department;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Hospital\Database\Factories\DoctorFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Hospital\Models\Department\DepartmentCategory;
 
 class Doctor extends Authenticatable
 {
@@ -45,6 +47,15 @@ class Doctor extends Authenticatable
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+    public function specialty()
+    {
+        return $this->belongsTo(Specialty::class);
+    }
+    
+    public function departmentCategory()
+    {
+        return $this->belongsTo(DepartmentCategory::class);
     }
 
     public function patients()

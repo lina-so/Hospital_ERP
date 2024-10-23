@@ -17,6 +17,7 @@ class RoomRequest extends FormRequest
         return [
             'room_number'=>['integer','min:1','max:255'],
             'department_id'=>['required','integer','exists:departments,id'],
+            'room_category_id'=>['required','integer','exists:room_categories,id'],
             'floor_id'=>['required','integer','exists:floors,id'],
             'status' => ['required', new EnumValue(StatusEnum::class)],
 

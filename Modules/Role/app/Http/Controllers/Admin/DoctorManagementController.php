@@ -7,6 +7,7 @@ use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Modules\Hospital\Models\Doctor\Doctor;
 use Modules\Hospital\Http\Requests\Doctor\DoctorRequest;
+use Modules\Hospital\Transformers\Doctor\DoctorResource;
 
 class DoctorManagementController extends Controller
 {
@@ -17,7 +18,7 @@ class DoctorManagementController extends Controller
     public function index()
     {
         $doctors = Doctor::all();
-        return $this->apiSuccess($doctors, 'doctors fetched successfully',200);
+        return $this->apiSuccess(DoctorResource::collection($doctors), 'doctors fetched successfully',200);
     }
 
 
@@ -28,7 +29,8 @@ class DoctorManagementController extends Controller
     {
         $validated = $request->validated();
         $doctor = Doctor::create($validated);
-        return $this->apiSuccess($doctor, 'doctor added successfully',201);
+
+        return $this->apiSuccess(new DoctorResource($doctor), 'doctor added successfully',201);
 
 
     }
@@ -38,7 +40,7 @@ class DoctorManagementController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        return $this->apiSuccess($doctor, 'doctor retrieved successfully',200);
+        return $this->apiSuccess(new DoctorResource($doctor), 'doctor retrieved successfully',200);
 
     }
 
@@ -50,7 +52,7 @@ class DoctorManagementController extends Controller
 
         $validated = $request->validated();
         $doctor->update($validated);
-        return $this->apiSuccess($doctor, 'doctor updated successfully',201);
+        return $this->apiSuccess(new DoctorResource($doctor), 'doctor updated successfully',201);
 
     }
     /**
@@ -59,7 +61,7 @@ class DoctorManagementController extends Controller
     public function destroy(Doctor $doctor)
     {
         $doctor->delete();
-        return $this->apiSuccess($doctor, 'doctor deleted successfully',201);
+        return $this->apiSuccess(new DoctorResource($doctor), 'doctor deleted successfully',201);
 
     }
 }

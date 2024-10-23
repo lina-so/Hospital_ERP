@@ -22,6 +22,7 @@ class MedicalRecord extends Model
      'diagnosis', 'symptoms','allergy','treatment', 'notes','visit_id'];
 
 
+     
 
      public function patient()
      {

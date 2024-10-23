@@ -18,6 +18,7 @@ class VisitResource extends JsonResource
         'patient' => new PatientResource($this->patient),
         'doctor' => new DoctorResource($this->doctor),
         'visit_date' => $this->visit_date,
+        
        ];
     }
 }

@@ -42,7 +42,7 @@ class MedicalRecordController extends Controller
             $medical_record = $patient_service->medical_record()->create($medical_request_validated);
 
             $appointment = Appointment::create($appointment_request_validated);
-
+            
             return $this->apiSuccess(new MedicalRecordResource($medical_record), 'Patient data added to medical record successfully ', 201);
         });
     }

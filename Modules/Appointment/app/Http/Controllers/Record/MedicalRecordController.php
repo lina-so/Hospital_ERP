@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Modules\Appointment\Models\Appointment\Appointment;
 use Modules\Service\Models\PatientService\PatientService;
+use Modules\Appointment\Transformers\Medical\MedicalRecordResource;
 use Modules\Appointment\Http\Requests\Appointment\AppointmentRequest;
 use Modules\Service\Http\Requests\PatientService\PatientServiceRequest;
 use Modules\Appointment\Http\Requests\MedicalRecord\MedicalRecordRequest;
@@ -42,7 +43,7 @@ class MedicalRecordController extends Controller
 
             $appointment = Appointment::create($appointment_request_validated);
 
-            return $this->apiSuccess($medical_record, 'Patient data added to medical record successfully ', 201);
+            return $this->apiSuccess(new MedicalRecordResource($medical_record), 'Patient data added to medical record successfully ', 201);
         });
     }
 

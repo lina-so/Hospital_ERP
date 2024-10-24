@@ -17,7 +17,8 @@ class SurgicalOperation extends Model
 
     protected $table = 'surgical_operations';
 
-    protected $fillable = ['patient_id', 'doctor_id', 'room_id', 'operation_type', 'duration', 'status', 'operation_date'];
+    protected $fillable = ['patient_id', 'doctor_id', 'room_id',
+     'operation_type', 'duration', 'status', 'operation_date'];
 
 
     // protected static function newFactory(): SurgicalOperation/SurgicalOperationFactory

@@ -31,7 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/*')) {
-                $message = "Route/File Not Found";
+                $message = "Not Found";
                 return response()->json([
                     'status_code' => 404,
                     'data' => [

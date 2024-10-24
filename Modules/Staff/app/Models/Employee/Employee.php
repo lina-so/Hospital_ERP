@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Modules\Hospital\Models\Department\Department;
+use Modules\Staff\Models\StaffSchedule\StaffSchedule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -42,6 +43,10 @@ class Employee extends Authenticatable
         ];
     }
 
+    public function schedules()
+    {
+        return $this->morphMany(StaffSchedule::class, 'employeeable');
+    }
 
     public function department()
     {

@@ -26,6 +26,8 @@ class Visit extends Model
     'status'
     ];
 
+    protected $with = ['patient','doctor'];
+
     protected function casts(): array
     {
         return [

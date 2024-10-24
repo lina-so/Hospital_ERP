@@ -5,6 +5,7 @@ namespace Modules\Appointment\Transformers\Medical;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Hospital\Transformers\Doctor\DoctorResource;
+use Modules\Service\Transformers\PatientServiceResource;
 use Modules\Appointment\Transformers\Visit\VisitResource;
 use Modules\Appointment\Transformers\Patient\PatientResource;
 
@@ -25,8 +26,8 @@ class MedicalRecordResource extends JsonResource
             'allergy' => $this->allergy,
             'treatment' => $this->treatment,
             'notes' => $this->notes,
-            'patient_service_id' => $this->patient_service_id,
-            
+            'patient_service_id' => new PatientServiceResource($this->whenLoaded('patient_service')),
+
         ];
     }
 }

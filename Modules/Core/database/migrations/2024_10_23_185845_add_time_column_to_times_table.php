@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('times', function (Blueprint $table) {
-            $table->id();
-            $table->date('start_time');
-            $table->date('end_time');
-            // $table->string('shift_name');// صباحي , مسائي
-            $table->timestamps();
+        Schema::table('times', function (Blueprint $table) {
+            $table->time('start_time');
+            $table->time('end_time');
+
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('times');
+        Schema::table('times', function (Blueprint $table) {
+            $table->dropColumn('start_time');
+            $table->dropColumn('end_time');
+        });
     }
 };

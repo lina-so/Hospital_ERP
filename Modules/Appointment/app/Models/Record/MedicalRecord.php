@@ -7,6 +7,7 @@ use Modules\Hospital\Models\Doctor\Doctor;
 use Modules\Appointment\Models\Visit\Visit;
 use Modules\Appointment\Models\Patient\Patient;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Service\Models\PatientService\PatientService;
 // use Modules\Appointment\Database\Factories\Record/MedicalRecordFactory;
 
 class MedicalRecord extends Model
@@ -17,12 +18,11 @@ class MedicalRecord extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'medical_records';
+    protected $with = ['patient_service'];
 
     protected $fillable = ['patient_id', 'doctor_id', 'patient_service_id',
      'diagnosis', 'symptoms','allergy','treatment', 'notes','visit_id'];
 
-
-     
 
      public function patient()
      {
@@ -37,6 +37,11 @@ class MedicalRecord extends Model
      public function visit()
      {
          return $this->belongsTo(Visit::class);
+     }
+
+     public function patient_service()
+     {
+        return $this->belongsTo(PatientService::class);
      }
 
     // protected static function newFactory(): Record/MedicalRecordFactory

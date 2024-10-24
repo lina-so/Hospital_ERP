@@ -2,11 +2,20 @@
 
 namespace Modules\Staff\Http\Controllers\StaffSchedule;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Traits\APi\ResponseTrait;
+use App\Http\Controllers\Controller;
+use Modules\Hospital\Models\Doctor\Doctor;
+use Modules\Staff\Models\Employee\Employee;
+use Modules\Staff\Models\StaffSchedule\StaffSchedule;
+use Modules\Service\Transformers\StaffScheduleResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Modules\Staff\Http\Requests\Shedule\StaffScheduleRequest;
 
 class StaffScheduleController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -15,21 +24,39 @@ class StaffScheduleController extends Controller
         return view('staff::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('staff::create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StaffScheduleRequest $request)
     {
-        //
+        $data = $request->validated();
+        $days = $data['days'];
+        $time_id = $data['time_id'];
+
+        if($request->type == 'doctor')
+        {
+            $employee = Doctor::where('email',$request->email)->first();
+        }
+        else if($request->type == 'employee')
+        {
+            $employee = Employee::where('email',$request->email)->first();
+        }
+
+        $schedule = StaffSchedule::create([
+            'employeeable_type'=>$employee ? get_class($employee) : throw new ModelNotFoundException('Employee with the given email was not found.'),
+            'employeeable_id'=>$employee?  $employee->id : throw new ModelNotFoundException('Employee with the given email was not found.'),
+            'time_id'=> $time_id,
+        ]);
+
+        $schedule->days()->attach($days);
+
+        return $this->apiSuccess(new StaffScheduleResource($schedule), 'schedule added successfully',201);
+
+
     }
+
 
     /**
      * Show the specified resource.
@@ -39,13 +66,6 @@ class StaffScheduleController extends Controller
         return view('staff::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('staff::edit');
-    }
 
     /**
      * Update the specified resource in storage.

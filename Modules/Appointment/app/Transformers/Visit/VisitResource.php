@@ -15,10 +15,10 @@ class VisitResource extends JsonResource
     public function toArray(Request $request): array
     {
        return [
-        'patient' => new PatientResource($this->patient),
-        'doctor' => new DoctorResource($this->doctor),
+        'patient' => new PatientResource($this->whenLoaded('patient')),
+        'doctor' => new DoctorResource($this->whenLoaded('doctor')),
         'visit_date' => $this->visit_date,
-        
+
        ];
     }
 }

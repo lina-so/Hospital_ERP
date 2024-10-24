@@ -15,8 +15,11 @@ class RoomResource extends JsonResource
         // return parent::toArray($request);
         $data =  [
             'id' => $this->id,
+            'department_id' => $this->department_id,
             'department' => $this->department->name,
+            'room_category_id' => $this->roomCategory->id,
             'room_category' => $this->roomCategory->name,
+            'floor_id' => $this->floor->id,
             'floor' => $this->floor->name,
             'room_number' => $this->room_number,
             'status' => $this->status,

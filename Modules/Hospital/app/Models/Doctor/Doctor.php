@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Modules\Appointment\Models\Patient\Patient;
 use Modules\Hospital\Models\Specialty\Specialty;
 use Modules\Hospital\Models\Department\Department;
+use Modules\Staff\Models\StaffSchedule\StaffSchedule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Hospital\Database\Factories\DoctorFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,7 +53,7 @@ class Doctor extends Authenticatable
     {
         return $this->belongsTo(Specialty::class);
     }
-    
+
     public function departmentCategory()
     {
         return $this->belongsTo(DepartmentCategory::class);
@@ -61,6 +62,10 @@ class Doctor extends Authenticatable
     public function patients()
     {
         return $this->hasMany(Patient::class);
+    }
+    public function schedules()
+    {
+        return $this->morphMany(StaffSchedule::class, 'employeeable');
     }
     protected static function newFactory()
     {

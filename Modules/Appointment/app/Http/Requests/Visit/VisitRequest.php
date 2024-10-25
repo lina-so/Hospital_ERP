@@ -19,7 +19,7 @@ class VisitRequest extends FormRequest
             'room_id' =>['required','integer','exists:rooms,id'],
             'visit_reason' => ['nullable','string','min:3','max:1000'],
             'visit_date'=>['nullable','date','after_or_equal:today'],
-            'status' => ['required',new EnumValue(StatusEnum::class)],
+            'status' => [new EnumValue(StatusEnum::class)],
         ];
     }
 

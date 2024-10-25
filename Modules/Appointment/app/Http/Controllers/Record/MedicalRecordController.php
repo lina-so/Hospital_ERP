@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Traits\APi\ResponseTrait;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Modules\Appointment\Models\Visit\Visit;
 use Modules\Appointment\Models\Appointment\Appointment;
 use Modules\Service\Models\PatientService\PatientService;
+use Modules\Service\Models\SurgicalOperation\SurgicalOperation;
 use Modules\Appointment\Transformers\Medical\MedicalRecordResource;
 use Modules\Appointment\Http\Requests\Appointment\AppointmentRequest;
 use Modules\Service\Http\Requests\PatientService\PatientServiceRequest;
@@ -36,6 +38,10 @@ class MedicalRecordController extends Controller
             $medical_request_validated = $m_request->validated();
             $appointment_request_validated = $a_request->validated();
             $patient_service_request_validated = $p_request->validated();
+            $visit = Visit::find($medical_request_validated['visit_id'])->first();
+            $visit->update([
+                'status'=>'completed',
+            ]);
 
             $patient_service = PatientService::create($patient_service_request_validated);
 
@@ -43,9 +49,24 @@ class MedicalRecordController extends Controller
 
             $appointment = Appointment::create($appointment_request_validated);
 
+            if(request()->service && request()->service == 'operation')
+            {
+                $surgical_operation = SurgicalOperation::create([
+                    'appointment_id' => $appointment->id,
+                    'doctor_id' => $medical_request_validated['doctor_id'],
+                    'room_id'=> $medical_request_validated['room_id'],
+                    'patient_id'=> $medical_request_validated['patient_id'],
+                    'operation_type' => $patient_service_request_validated['service_type'],
+                    'operation_date' => $appointment_request_validated['appointment_date'],
+                ]);
+            }
+
             return $this->apiSuccess(new MedicalRecordResource($medical_record), 'Patient data added to medical record successfully ', 201);
         });
     }
+
+    // $table->integer('duration')->default(0); // Duration in minutes
+    // $table->enum('status', StatusEnum::getValues())->default(StatusEnum::Scheduled);
 
     /**
      * Show the specified resource.

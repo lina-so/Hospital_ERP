@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Http\Controllers\Auth\AuthController;
 use Modules\Auth\Http\Controllers\login\admin\AdminLoginController;
+use Modules\Auth\Http\Controllers\login\doctor\DoctorLoginController;
 use Modules\Auth\Http\Controllers\login\employee\EmployeeLoginController;
 
 
@@ -34,6 +35,17 @@ Route::controller(EmployeeLoginController::class)
     Route::middleware('guest:sanctum')
     ->group(function(){
         Route::post('employee/login','login')->name('login');
+
+    });
+});
+
+
+Route::controller(DoctorLoginController::class)
+->prefix('auth')
+->group(function(){
+    Route::middleware('guest:sanctum')
+    ->group(function(){
+        Route::post('doctor/login','login')->name('login');
 
     });
 });

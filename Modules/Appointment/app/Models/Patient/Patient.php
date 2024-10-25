@@ -4,6 +4,7 @@ namespace Modules\Appointment\Models\Patient;
 
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Hospital\Models\Room\Room;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Modules\Appointment\Models\Visit\Visit;
@@ -44,6 +45,12 @@ class Patient extends Model
      {
         return $this->hasMany(Visit::class);
      }
+
+     public function room()
+     {
+         return $this->belongsTo(Room::class);
+     }
+
 
     public function medicalRecords()
     {

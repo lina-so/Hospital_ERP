@@ -21,7 +21,6 @@ class DoctorRequest extends FormRequest
             'phone_number' => ['required', 'string', 'min:10','max:15'],
             'specialty_id' => ['required', 'exists:specialties,id'],
             'department_id' => ['required', 'exists:departments,id'],
-            'department_category_id' => ['required', 'exists:department_categories,id'],
         ];
     }
 

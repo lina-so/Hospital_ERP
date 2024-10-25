@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Auth\Http\Requests\Auth\login\employee;
+namespace Modules\Auth\Http\Requests\Auth\login\doctor;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Modules\Auth\Rules\Auth\PasswordMatchRule;
 
-class EmployeeLoginRequest extends FormRequest
+class DoctorLoginRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,9 +13,8 @@ class EmployeeLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=>['required','exists:employees,email'],
+            'email'=>['required','exists:doctors,email'],
             'password'=>['required','string'],
-
         ];
     }
 

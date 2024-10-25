@@ -12,7 +12,7 @@ use BenSampo\Enum\Enum;
  */
 final class StatusEnum extends Enum
 {
-    const Scheduled = 'scheduled';
+    const Scheduled = 'scheduled';//default
     const InProgress = 'in_progress';
     const Completed = 'completed';
 }

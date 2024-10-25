@@ -15,6 +15,7 @@ class MedicalRecordRequest extends FormRequest
             'patient_id' => ['required', 'exists:patients,id'],
             'doctor_id' => ['required', 'exists:doctors,id'],
             'visit_id' => ['required', 'exists:visits,id'],
+            'room_id' => ['exists:rooms,id'],
             'patient_service_id' => ['exists:patient_services,id'],
             'diagnosis' => ['required', 'string','min:3','max:255'],
             'symptoms' => ['required', 'string','min:3','max:255'],

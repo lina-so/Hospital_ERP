@@ -6,6 +6,7 @@ use Modules\Hospital\Models\Room\Room;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Hospital\Models\Floor\Floor;
 use Modules\Hospital\Models\Room\RoomCategory;
+use Modules\Appointment\Models\Patient\Patient;
 use Modules\Hospital\Models\Department\Department;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Modules\Hospital\Database\Factories\Room/RoomFactory;
@@ -35,6 +36,10 @@ class Room extends Model
     public function floor()
     {
         return $this->belongsTo(Floor::class);
+    }
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
     }
 
     protected static function booted()

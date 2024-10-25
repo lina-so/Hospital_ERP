@@ -1,24 +1,23 @@
 <?php
 
-namespace Modules\Auth\Http\Controllers\login\employee;
+namespace Modules\Auth\Http\Controllers\login\doctor;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\APi\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Modules\Role\Models\Admin\Admin;
 use Illuminate\Support\Facades\Route;
-use Modules\Staff\Models\Employee\Employee;
-use Modules\Auth\Http\Requests\Auth\login\employee\EmployeeLoginRequest;
+use Modules\Hospital\Models\Doctor\Doctor;
+use Modules\Auth\Http\Requests\Auth\login\doctor\DoctorLoginRequest;
 
-class EmployeeLoginController extends Controller
+class DoctorLoginController extends Controller
 {
     use ResponseTrait;
 
     /********************************************************************************************/
 
-    public function login(EmployeeLoginRequest $request)
+    public function login(DoctorLoginRequest $request)
     {
         // dd(request()->route()->getName());
         // dd(Route::current()->uri);
@@ -33,7 +32,7 @@ class EmployeeLoginController extends Controller
     /********************************************************************************************/
     public function findAdminByEmail($requestData)
     {
-        return Employee::where('email', $requestData['email'])->first();
+        return Doctor::where('email', $requestData['email'])->first();
     }
     /********************************************************************************************/
     public function createAccessToken($employee)

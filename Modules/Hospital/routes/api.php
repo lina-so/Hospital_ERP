@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Hospital\Http\Controllers\Room\RoomController;
 use Modules\Hospital\Http\Controllers\Doctor\DoctorController;
 use Modules\Hospital\Http\Controllers\Room\RoomCategoryController;
+use Modules\Hospital\Http\Controllers\Discharge\DischargeController;
 use Modules\Hospital\Http\Controllers\Department\DepartmentController;
 use Modules\Hospital\Http\Controllers\Department\DepartmentCategoryController;
 
@@ -30,7 +31,8 @@ Route::apiResource('department-category', DepartmentCategoryController::class)->
 
 //*////////////////////////// Doctor /////////////////////////////////////*//
 
-Route::middleware('auth:doctor')->group(function () {
-    // Route::post('/doctor/login', [DoctorController::class, 'login']);
-});
 
+Route::middleware('auth:employee' ,'employee_type:receptionist')->group(function () {
+    Route::post('discharge', [DischargeController::class,'store'])->name('patient-discharge');
+
+});

@@ -27,6 +27,7 @@ return new class extends Migration
             // $table->text('allergies')->nullable();
             $table->date('admission_date')->nullable();
             $table->date('discharge_date')->nullable();
+            $table->foreignIdFor(Room::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
         });

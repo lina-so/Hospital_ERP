@@ -27,6 +27,7 @@ class PatientRequest extends FormRequest
             'allergies' => ['nullable', 'string'],
             'admission_date' => ['nullable', 'date'],
             'discharge_date' => ['nullable', 'date', 'after:admission_date'],
+            'room_id'=>['required','integer','exists:rooms,id'],
         ];
     }
 
